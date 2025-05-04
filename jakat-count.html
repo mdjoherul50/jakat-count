@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>জাকাত ক্যালকুলেটর</title>
+  <style>
+    body {
+      font-family: 'SolaimanLipi', 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #444;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #27ae60;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1e8449;
+    }
+    .result {
+      margin-top: 20px;
+      background: #e8f5e9;
+      padding: 15px;
+      border-left: 5px solid #2e7d32;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>💰 জাকাত ক্যালকুলেটর</h2>
+
+  <div class="input-group">
+    <label for="cash">নগদ অর্থ (৳):</label>
+    <input type="number" id="cash" placeholder="যেমনঃ ৫০০০০">
+  </div>
+
+  <div class="input-group">
+    <label for="gold">সোনার মূল্য (৳):</label>
+    <input type="number" id="gold" placeholder="যেমনঃ ১৫০০০০">
+  </div>
+
+  <div class="input-group">
+    <label for="silver">রূপার মূল্য (৳):</label>
+    <input type="number" id="silver" placeholder="যেমনঃ ২০০০">
+  </div>
+
+  <div class="input-group">
+    <label for="business">ব্যবসার সম্পদ (৳):</label>
+    <input type="number" id="business" placeholder="যেমনঃ ১০০০০০">
+  </div>
+
+  <div class="input-group">
+    <label for="stocks">বিনিয়োগ/শেয়ার (৳):</label>
+    <input type="number" id="stocks" placeholder="যেমনঃ ৫০০০০">
+  </div>
+
+  <div class="input-group">
+    <label for="property">আয় উপযোগী সম্পত্তি (ব্যক্তিগত নয়) (৳):</label>
+    <input type="number" id="property" placeholder="যেমনঃ ২০০০০০">
+  </div>
+
+  <div class="input-group">
+    <label for="liabilities">ঋণ/দায় (৳):</label>
+    <input type="number" id="liabilities" placeholder="যেমনঃ ২৫০০০">
+  </div>
+
+  <button onclick="calculateZakat()">হিসাব করুন</button>
+
+  <div class="result" id="result" style="display: none;"></div>
+</div>
+
+<script>
+  function calculateZakat() {
+    const cash = parseFloat(document.getElementById('cash').value) || 0;
+    const gold = parseFloat(document.getElementById('gold').value) || 0;
+    const silver = parseFloat(document.getElementById('silver').value) || 0;
+    const business = parseFloat(document.getElementById('business').value) || 0;
+    const stocks = parseFloat(document.getElementById('stocks').value) || 0;
+    const property = parseFloat(document.getElementById('property').value) || 0;
+    const liabilities = parseFloat(document.getElementById('liabilities').value) || 0;
+
+    const totalAssets = cash + gold + silver + business + stocks + property;
+    const netWealth = totalAssets - liabilities;
+
+    const nisabThreshold = 540000; // ৮৫ গ্রাম সোনার বাজারদর অনুযায়ী
+
+    const zakatDue = netWealth >= nisabThreshold ? netWealth * 0.025 : 0;
+
+    const result = document.getElementById('result');
+    result.style.display = 'block';
+
+    if (zakatDue > 0) {
+      result.innerHTML = `
+        <strong>মোট নিট সম্পদ:</strong> ৳${netWealth.toLocaleString()}<br>
+        <strong>জাকাত (২.৫%):</strong> <span style="color:green;">৳${zakatDue.toLocaleString()}</span><br>
+        ✅ আপনি নিসাব অতিক্রম করেছেন। জাকাত ফরজ হয়েছে।
+      `;
+    } else {
+      result.innerHTML = `
+        <strong>মোট নিট সম্পদ:</strong> ৳${netWealth.toLocaleString()}<br>
+        ❌ <span style="color:red;">আপনার সম্পদ নিসাবের নিচে।</span><br>
+        বর্তমানে আপনার উপর জাকাত ফরজ নয়।
+      `;
+    }
+  }
+</script>
+
+</body>
+</html>
