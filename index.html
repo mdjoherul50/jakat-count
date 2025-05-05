@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
   <meta charset="UTF-8">
-  <title>জাকাত ক্যালকুলেটর</title>
+  <title>Zakat Calculator</title>
   <style>
     body {
       font-family: 'SolaimanLipi', 'Segoe UI', sans-serif;
@@ -10,26 +11,31 @@
       margin: 0;
       padding: 20px;
     }
+
     .container {
       max-width: 600px;
       margin: auto;
       background: #fff;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
+
     h2 {
       text-align: center;
       color: #2c3e50;
     }
+
     .input-group {
       margin-bottom: 15px;
     }
+
     label {
       display: block;
       margin-bottom: 5px;
       color: #444;
     }
+
     input {
       width: 100%;
       padding: 10px;
@@ -37,6 +43,7 @@
       border: 1px solid #ccc;
       font-size: 15px;
     }
+
     button {
       width: 100%;
       padding: 12px;
@@ -47,9 +54,11 @@
       border-radius: 6px;
       cursor: pointer;
     }
+
     button:hover {
       background: #1e8449;
     }
+
     .result {
       margin-top: 20px;
       background: #e8f5e9;
@@ -57,88 +66,234 @@
       border-left: 5px solid #2e7d32;
       border-radius: 6px;
     }
+
+    .info {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .reset-btn {
+      background: #e74c3c;
+      margin-top: 10px;
+    }
+
+    .reset-btn:hover {
+      background: #c0392b;
+    }
+
+    /* Custom Button Style for Language Toggle */
+    .language-btn {
+      width: 100%;
+      padding: 12px;
+      background: #3498db;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .language-btn:hover {
+      background: #2980b9;
+    }
   </style>
 </head>
+
 <body>
 
-<div class="container">
-  <h2>💰 জাকাত ক্যালকুলেটর</h2>
+  <div class="container">
+    <h2 id="title">💰 জাকাত ক্যালকুলেটর</h2>
 
-  <div class="input-group">
-    <label for="cash">নগদ অর্থ (৳):</label>
-    <input type="number" id="cash" placeholder="যেমনঃ ৫০০০০">
+    <!-- Language Toggle Button -->
+    <button class="language-btn" onclick="toggleLanguage()">Switch to English</button>
+
+    <div class="input-group">
+      <label for="cash" id="cashLabel">নগদ অর্থ (৳):</label>
+      <input type="number" id="cash" placeholder="যেমনঃ ৫০০০০">
+    </div>
+
+    <div class="input-group">
+      <label for="gold" id="goldLabel">সোনার মূল্য (৳):</label>
+      <input type="number" id="gold" placeholder="যেমনঃ ১৫০০০০">
+    </div>
+
+    <div class="input-group">
+      <label for="silver" id="silverLabel">রূপার মূল্য (৳):</label>
+      <input type="number" id="silver" placeholder="যেমনঃ ২০০০">
+    </div>
+
+    <div class="input-group">
+      <label for="business" id="businessLabel">ব্যবসার সম্পদ (৳):</label>
+      <input type="number" id="business" placeholder="যেমনঃ ১০০০০০">
+    </div>
+
+    <div class="input-group">
+      <label for="stocks" id="stocksLabel">বিনিয়োগ/শেয়ার (৳):</label>
+      <input type="number" id="stocks" placeholder="যেমনঃ ৫০০০০">
+    </div>
+
+    <div class="input-group">
+      <label for="property" id="propertyLabel">আয় উপযোগী সম্পত্তি (ব্যক্তিগত নয়) (৳):</label>
+      <input type="number" id="property" placeholder="যেমনঃ ২০০০০০">
+    </div>
+
+    <div class="input-group">
+      <label for="liabilities" id="liabilitiesLabel">ঋণ/দায় (৳):</label>
+      <input type="number" id="liabilities" placeholder="যেমনঃ ২৫০০০">
+    </div>
+
+    <button onclick="calculateZakat()" id="calculateBtn">হিসাব করুন</button>
+    <button class="reset-btn" onclick="resetFields()" id="resetBtn">পুনরায় শুরু করুন</button>
+
+    <div class="result" id="result" style="display: none;"></div>
+
+    <div class="info">
+      <h4 id="infoTitle">জাকাত সম্পর্কে:</h4>
+      <p id="infoText">বাংলাদেশে, যাকাত দেওয়া ইসলামের অন্যতম গুরুত্বপূর্ণ একটি ফারজ (ঋণ), যা মুসলমানদের সম্পদের ২.৫%
+        বের করা হয়। এটি সাধারণত নিসাবের পরিমাণ পৌঁছানো সম্পদের উপর ফরজ হয়, যেখানে সোনা ও রূপা ব্যবহার করা হয়। আপনার
+        উপর যাকাত ফরজ হওয়ার জন্য নিসাবের পরিমাণ (৮৫ গ্রাম সোনার মূল্য) পুরণ হতে হবে।</p>
+    </div>
   </div>
 
-  <div class="input-group">
-    <label for="gold">সোনার মূল্য (৳):</label>
-    <input type="number" id="gold" placeholder="যেমনঃ ১৫০০০০">
-  </div>
+  <script>
+    let languageData = {
+      bn: {
+        title: "💰 জাকাত ক্যালকুলেটর",
+        cashLabel: "নগদ অর্থ (৳):",
+        goldLabel: "সোনার মূল্য (৳):",
+        silverLabel: "রূপার মূল্য (৳):",
+        businessLabel: "ব্যবসার সম্পদ (৳):",
+        stocksLabel: "বিনিয়োগ/শেয়ার (৳):",
+        propertyLabel: "আয় উপযোগী সম্পত্তি (ব্যক্তিগত নয়) (৳):",
+        liabilitiesLabel: "ঋণ/দায় (৳):",
+        calculateBtn: "হিসাব করুন",
+        resetBtn: "পুনরায় শুরু করুন",
+        infoTitle: "জাকাত সম্পর্কে:",
+        infoText: "বাংলাদেশে, যাকাত দেওয়া ইসলামের অন্যতম গুরুত্বপূর্ণ একটি ফারজ (ঋণ), যা মুসলমানদের সম্পদের ২.৫% বের করা হয়। এটি সাধারণত নিসাবের পরিমাণ পৌঁছানো সম্পদের উপর ফরজ হয়, যেখানে সোনা ও রূপা ব্যবহার করা হয়। আপনার উপর যাকাত ফরজ হওয়ার জন্য নিসাবের পরিমাণ (৮৫ গ্রাম সোনার মূল্য) পুরণ হতে হবে。",
+        placeholders: {
+          cash: "যেমনঃ ৫০০০০",
+          gold: "যেমনঃ ১৫০০০০",
+          silver: "যেমনঃ ২০০০",
+          business: "যেমনঃ ১০০০০০",
+          stocks: "যেমনঃ ৫০০০০",
+          property: "যেমনঃ ২০০০০০",
+          liabilities: "যেমনঃ ২৫০০০"
+        }
+      },
+      en: {
+        title: "💰 Zakat Calculator",
+        cashLabel: "Cash (৳):",
+        goldLabel: "Gold Value (৳):",
+        silverLabel: "Silver Value (৳):",
+        businessLabel: "Business Assets (৳):",
+        stocksLabel: "Investments/Stocks (৳):",
+        propertyLabel: "Income-generating Property (Not Personal) (৳):",
+        liabilitiesLabel: "Liabilities (৳):",
+        calculateBtn: "Calculate",
+        resetBtn: "Reset",
+        infoTitle: "About Zakat:",
+        infoText: "In Bangladesh, giving Zakat is an important obligation in Islam, where Muslims are required to give 2.5% of their wealth. It is applicable to wealth that meets the Nisab threshold, typically based on gold and silver values. Zakat becomes obligatory when your wealth reaches the Nisab threshold (85 grams of gold).",
+        placeholders: {
+          cash: "For example: 50000",
+          gold: "For example: 150000",
+          silver: "For example: 2000",
+          business: "For example: 100000",
+          stocks: "For example: 50000",
+          property: "For example: 200000",
+          liabilities: "For example: 25000"
+        }
+      }
+    };
 
-  <div class="input-group">
-    <label for="silver">রূপার মূল্য (৳):</label>
-    <input type="number" id="silver" placeholder="যেমনঃ ২০০০">
-  </div>
+    let currentLanguage = 'bn'; // default to Bangla
 
-  <div class="input-group">
-    <label for="business">ব্যবসার সম্পদ (৳):</label>
-    <input type="number" id="business" placeholder="যেমনঃ ১০০০০০">
-  </div>
+    function toggleLanguage() {
+      currentLanguage = (currentLanguage === 'bn') ? 'en' : 'bn'; // Toggle language
+      updateLanguage();
+    }
 
-  <div class="input-group">
-    <label for="stocks">বিনিয়োগ/শেয়ার (৳):</label>
-    <input type="number" id="stocks" placeholder="যেমনঃ ৫০০০০">
-  </div>
+    function updateLanguage() {
+      let langContent = languageData[currentLanguage];
 
-  <div class="input-group">
-    <label for="property">আয় উপযোগী সম্পত্তি (ব্যক্তিগত নয়) (৳):</label>
-    <input type="number" id="property" placeholder="যেমনঃ ২০০০০০">
-  </div>
+      // Update UI with selected language
+      document.getElementById('title').innerText = langContent.title;
+      document.getElementById('cashLabel').innerText = langContent.cashLabel;
+      document.getElementById('goldLabel').innerText = langContent.goldLabel;
+      document.getElementById('silverLabel').innerText = langContent.silverLabel;
+      document.getElementById('businessLabel').innerText = langContent.businessLabel;
+      document.getElementById('stocksLabel').innerText = langContent.stocksLabel;
+      document.getElementById('propertyLabel').innerText = langContent.propertyLabel;
+      document.getElementById('liabilitiesLabel').innerText = langContent.liabilitiesLabel;
+      document.getElementById('calculateBtn').innerText = langContent.calculateBtn;
+      document.getElementById('resetBtn').innerText = langContent.resetBtn;
+      document.getElementById('infoTitle').innerText = langContent.infoTitle;
+      document.getElementById('infoText').innerText = langContent.infoText;
 
-  <div class="input-group">
-    <label for="liabilities">ঋণ/দায় (৳):</label>
-    <input type="number" id="liabilities" placeholder="যেমনঃ ২৫০০০">
-  </div>
+      // Update Placeholders
+      document.getElementById('cash').placeholder = langContent.placeholders.cash;
+      document.getElementById('gold').placeholder = langContent.placeholders.gold;
+      document.getElementById('silver').placeholder = langContent.placeholders.silver;
+      document.getElementById('business').placeholder = langContent.placeholders.business;
+      document.getElementById('stocks').placeholder = langContent.placeholders.stocks;
+      document.getElementById('property').placeholder = langContent.placeholders.property;
+      document.getElementById('liabilities').placeholder = langContent.placeholders.liabilities;
 
-  <button onclick="calculateZakat()">হিসাব করুন</button>
+      // Change the language button text
+      let languageBtn = document.querySelector(".language-btn");
+      languageBtn.innerText = (currentLanguage === 'bn') ? "Switch to English" : "বাংলা তে পরিবর্তন করুন";
+    }
 
-  <div class="result" id="result" style="display: none;"></div>
-</div>
+    function calculateZakat() {
+      const cash = parseFloat(document.getElementById('cash').value) || 0;
+      const gold = parseFloat(document.getElementById('gold').value) || 0;
+      const silver = parseFloat(document.getElementById('silver').value) || 0;
+      const business = parseFloat(document.getElementById('business').value) || 0;
+      const stocks = parseFloat(document.getElementById('stocks').value) || 0;
+      const property = parseFloat(document.getElementById('property').value) || 0;
+      const liabilities = parseFloat(document.getElementById('liabilities').value) || 0;
 
-<script>
-  function calculateZakat() {
-    const cash = parseFloat(document.getElementById('cash').value) || 0;
-    const gold = parseFloat(document.getElementById('gold').value) || 0;
-    const silver = parseFloat(document.getElementById('silver').value) || 0;
-    const business = parseFloat(document.getElementById('business').value) || 0;
-    const stocks = parseFloat(document.getElementById('stocks').value) || 0;
-    const property = parseFloat(document.getElementById('property').value) || 0;
-    const liabilities = parseFloat(document.getElementById('liabilities').value) || 0;
+      const totalAssets = cash + gold + silver + business + stocks + property;
+      const netWealth = totalAssets - liabilities;
 
-    const totalAssets = cash + gold + silver + business + stocks + property;
-    const netWealth = totalAssets - liabilities;
+      const nisabThreshold = 540000; // ৮৫ গ্রাম সোনার বাজারদর অনুযায়ী
 
-    const nisabThreshold = 540000; // ৮৫ গ্রাম সোনার বাজারদর অনুযায়ী
+      const zakatDue = netWealth >= nisabThreshold ? netWealth * 0.025 : 0;
 
-    const zakatDue = netWealth >= nisabThreshold ? netWealth * 0.025 : 0;
+      const result = document.getElementById('result');
+      result.style.display = 'block';
 
-    const result = document.getElementById('result');
-    result.style.display = 'block';
-
-    if (zakatDue > 0) {
-      result.innerHTML = `
+      if (zakatDue > 0) {
+        result.innerHTML = `
         <strong>মোট নিট সম্পদ:</strong> ৳${netWealth.toLocaleString()}<br>
         <strong>জাকাত (২.৫%):</strong> <span style="color:green;">৳${zakatDue.toLocaleString()}</span><br>
         ✅ আপনি নিসাব অতিক্রম করেছেন। জাকাত ফরজ হয়েছে।
       `;
-    } else {
-      result.innerHTML = `
+      } else {
+        result.innerHTML = `
         <strong>মোট নিট সম্পদ:</strong> ৳${netWealth.toLocaleString()}<br>
         ❌ <span style="color:red;">আপনার সম্পদ নিসাবের নিচে।</span><br>
         বর্তমানে আপনার উপর জাকাত ফরজ নয়।
       `;
+      }
     }
-  }
-</script>
+
+    function resetFields() {
+      document.getElementById('cash').value = '';
+      document.getElementById('gold').value = '';
+      document.getElementById('silver').value = '';
+      document.getElementById('business').value = '';
+      document.getElementById('stocks').value = '';
+      document.getElementById('property').value = '';
+      document.getElementById('liabilities').value = '';
+      document.getElementById('result').style.display = 'none';
+    }
+
+    // Initialize the page with default language (Bangla)
+    updateLanguage();
+  </script>
 
 </body>
+
 </html>
