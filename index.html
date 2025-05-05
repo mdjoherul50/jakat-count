@@ -149,11 +149,18 @@
 
     <div class="result" id="result" style="display: none;"></div>
 
-    <div class="info">
-      <h4 id="infoTitle">জাকাত সম্পর্কে:</h4>
-      <p id="infoText">বাংলাদেশে, যাকাত দেওয়া ইসলামের অন্যতম গুরুত্বপূর্ণ একটি ফারজ (ঋণ), যা মুসলমানদের সম্পদের ২.৫%
-        বের করা হয়। এটি সাধারণত নিসাবের পরিমাণ পৌঁছানো সম্পদের উপর ফরজ হয়, যেখানে সোনা ও রূপা ব্যবহার করা হয়। আপনার
-        উপর যাকাত ফরজ হওয়ার জন্য নিসাবের পরিমাণ (৮৫ গ্রাম সোনার মূল্য) পুরণ হতে হবে।</p>
+    <!-- Nisab Explanation Section -->
+    <div class="info" id="nisabInfo">
+      <h4 id="infoTitle">নিসাব সম্পর্কে:</h4>
+      <p id="infoText">নিসাব হল সেই পরিমাণ সম্পদ, যা মুসলিমদের উপর যাকাত ফরজ করতে বাধ্য করে। এটি সোনা, রূপা বা অর্থের
+        নির্দিষ্ট পরিমাণ হতে পারে। সাধারণত, সোনার ভিত্তিতে নির্ধারিত হয়। </p>
+      <p>নিসাবের পরিমাণ:</p>
+      <ul>
+        <li>সোনা: ৮৫ গ্রাম সোনা বা এর সমমূল্য</li>
+        <li>রূপা: ৫৯৫ গ্রাম রূপা বা এর সমমূল্য</li>
+      </ul>
+      <p>যদি আপনার সম্পদ এই পরিমাণে পৌঁছায়, তাহলে আপনি যাকাত দিতে বাধ্য।</p>
+      <p>যাকাতের পরিমাণ: <strong>২.৫%</strong></p>
     </div>
   </div>
 
@@ -171,7 +178,10 @@
         calculateBtn: "হিসাব করুন",
         resetBtn: "পুনরায় শুরু করুন",
         infoTitle: "জাকাত সম্পর্কে:",
-        infoText: "বাংলাদেশে, যাকাত দেওয়া ইসলামের অন্যতম গুরুত্বপূর্ণ একটি ফারজ (ঋণ), যা মুসলমানদের সম্পদের ২.৫% বের করা হয়। এটি সাধারণত নিসাবের পরিমাণ পৌঁছানো সম্পদের উপর ফরজ হয়, যেখানে সোনা ও রূপা ব্যবহার করা হয়। আপনার উপর যাকাত ফরজ হওয়ার জন্য নিসাবের পরিমাণ (৮৫ গ্রাম সোনার মূল্য) পুরণ হতে হবে。",
+        infoText: "বাংলাদেশে, যাকাত দেওয়া ইসলামের অন্যতম গুরুত্বপূর্ণ একটি ফারজ (ঋণ), যা মুসলমানদের সম্পদের ২.৫% বের করা হয়। এটি সাধারণত নিসাবের পরিমাণ পৌঁছানো সম্পদের উপর ফরজ হয়, যেখানে সোনা ও রূপা ব্যবহার করা হয়। আপনার উপর যাকাত ফরজ হওয়ার জন্য নিসাবের পরিমাণ (৮৫ গ্রাম সোনার মূল্য) পুরণ হতে হবে।",
+        nisabTitle: "নিসাব সম্পর্কে:",
+        nisabText: "নিসাব হল সেই পরিমাণ সম্পদ, যা মুসলিমদের উপর যাকাত ফরজ করতে বাধ্য করে। এটি সোনা, রূপা বা অর্থের নির্দিষ্ট পরিমাণ হতে পারে। সাধারণত, সোনার ভিত্তিতে নির্ধারিত হয়।",
+        nisabDetails: "নিসাবের পরিমাণ: সোনা: ৮৫ গ্রাম সোনা বা এর সমমূল্য, রূপা: ৫৯৫ গ্রাম রূপা বা এর সমমূল্য",
         placeholders: {
           cash: "যেমনঃ ৫০০০০",
           gold: "যেমনঃ ১৫০০০০",
@@ -180,6 +190,10 @@
           stocks: "যেমনঃ ৫০০০০",
           property: "যেমনঃ ২০০০০০",
           liabilities: "যেমনঃ ২৫০০০"
+        },
+        result: {
+          aboveNisab: "✅ আপনি নিসাব অতিক্রম করেছেন। জাকাত ফরজ হয়েছে।",
+          belowNisab: "❌ আপনার সম্পদ নিসাবের নিচে। বর্তমানে আপনার উপর জাকাত ফরজ নয়।"
         }
       },
       en: {
@@ -195,6 +209,9 @@
         resetBtn: "Reset",
         infoTitle: "About Zakat:",
         infoText: "In Bangladesh, giving Zakat is an important obligation in Islam, where Muslims are required to give 2.5% of their wealth. It is applicable to wealth that meets the Nisab threshold, typically based on gold and silver values. Zakat becomes obligatory when your wealth reaches the Nisab threshold (85 grams of gold).",
+        nisabTitle: "About Nisab:",
+        nisabText: "Nisab is the minimum amount of wealth that makes Zakat obligatory. It can be based on gold, silver, or cash equivalent. Generally, it is based on gold.",
+        nisabDetails: "Nisab amount: Gold: 85 grams of gold or its equivalent, Silver: 595 grams of silver or its equivalent",
         placeholders: {
           cash: "For example: 50000",
           gold: "For example: 150000",
@@ -203,6 +220,10 @@
           stocks: "For example: 50000",
           property: "For example: 200000",
           liabilities: "For example: 25000"
+        },
+        result: {
+          aboveNisab: "✅ You have surpassed the Nisab. Zakat is obligatory.",
+          belowNisab: "❌ Your wealth is below the Nisab. Zakat is not obligatory on you."
         }
       }
     };
@@ -230,6 +251,11 @@
       document.getElementById('resetBtn').innerText = langContent.resetBtn;
       document.getElementById('infoTitle').innerText = langContent.infoTitle;
       document.getElementById('infoText').innerText = langContent.infoText;
+
+      // Update Nisab Info
+      document.getElementById('nisabInfo').querySelector('#infoTitle').innerText = langContent.nisabTitle;
+      document.getElementById('nisabInfo').querySelector('#infoText').innerText = langContent.nisabText;
+      document.getElementById('nisabInfo').querySelector('ul').innerHTML = `<li>${langContent.nisabDetails}</li>`;
 
       // Update Placeholders
       document.getElementById('cash').placeholder = langContent.placeholders.cash;
@@ -264,19 +290,16 @@
       const result = document.getElementById('result');
       result.style.display = 'block';
 
-      if (zakatDue > 0) {
-        result.innerHTML = `
-        <strong>মোট নিট সম্পদ:</strong> ৳${netWealth.toLocaleString()}<br>
-        <strong>জাকাত (২.৫%):</strong> <span style="color:green;">৳${zakatDue.toLocaleString()}</span><br>
-        ✅ আপনি নিসাব অতিক্রম করেছেন। জাকাত ফরজ হয়েছে।
-      `;
-      } else {
-        result.innerHTML = `
-        <strong>মোট নিট সম্পদ:</strong> ৳${netWealth.toLocaleString()}<br>
-        ❌ <span style="color:red;">আপনার সম্পদ নিসাবের নিচে।</span><br>
-        বর্তমানে আপনার উপর জাকাত ফরজ নয়।
-      `;
-      }
+      // Get the correct result message based on the language
+      let resultMessage = (netWealth >= nisabThreshold)
+        ? languageData[currentLanguage].result.aboveNisab
+        : languageData[currentLanguage].result.belowNisab;
+
+      result.innerHTML = `
+      <strong>মোট নিট সম্পদ:</strong> ৳${netWealth.toLocaleString()}<br>
+      <strong>জাকাত (২.৫%):</strong> <span style="color:green;">৳${zakatDue.toLocaleString()}</span><br>
+      ${resultMessage}
+    `;
     }
 
     function resetFields() {
